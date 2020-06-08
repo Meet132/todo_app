@@ -9,6 +9,10 @@
         <DisplayTodo 
             :todos = "todoFilter"
             @removeTodoFromList = "todos = $event"
+            @removeTodo = "deleteTodo"
+            @editTodo = "editTodoList"
+            @editTodoDone = "editTodoComplete"
+            @closeEditTodo = "cancelEditTodo"
         />
         <TodoFooter 
             @applyFilter = "filter = $event"
@@ -59,6 +63,18 @@ export default {
                 this.nextTodoId++;
                 this.newText =''
             }
+        },
+        deleteTodo(index) {
+            this.todos.splice(index,1)
+        },
+        editTodoList(todo) {
+            todo.isEditing = true
+        },
+        editTodoComplete(todo) {
+            todo.isEditing = false
+        },
+        cancelEditTodo(todo){
+            todo.isEditing = false
         }
     },
     computed : {

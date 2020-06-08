@@ -45,24 +45,20 @@ export default {
     },
     methods : {
         removeTodo(index) {
-            this.todos.splice(index,1)
-            this.$emit('removeTodoFromList',this.todos)
+            this.$emit('removeTodo',index)
         },
         editTodo (todo) {
             this.beforeText = todo.text
-            todo.isEditing = true
-            this.$emit('removeTodoFromList',this.todos)
+            this.$emit('editTodo',todo)
         },
         doneEditTodo(todo) {
             if(todo.text.length > 0) {
-                todo.isEditing = false
-                this.$emit('removeTodoFromList',this.todos)
+                this.$emit('editTodoDone',todo)
             }
         },
         closeEditTodo(todo){
             todo.text = this.beforeText
-            todo.isEditing = false
-            this.$emit('removeTodoFromList',this.todos)
+            this.$emit('closeEditTodo',todo)
         }
     }
 
